@@ -5,5 +5,11 @@ export const routes:RouteObject[] = [
     {
         path: "/",
         lazy: lazyLoad(import("@/components/layout/protected.layout")),
+        children: [
+            {
+                path: "/*",
+                lazy: lazyLoad(import("@/page/dashboard"))
+            }
+        ]
     }
 ]

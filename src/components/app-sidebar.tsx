@@ -7,20 +7,27 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "./ui/sidebar";
+import { useLocation, Link } from "react-router-dom";
+import { ModeToggle } from "./mode-toggle";
 
 export function AppSidebar() {
+  const { pathname } = useLocation();
+
   return (
     <Sidebar variant="inset">
-      <SidebarHeader>App</SidebarHeader>
+      <SidebarHeader className="flex flex-row justify-between items-center gap-2">
+        <p>App</p>
+        <ModeToggle />
+      </SidebarHeader>
       <SidebarContent>
         <SidebarMenu>
           {app_navigations.map((item) => (
             <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton asChild>
-                <a href={item.url}>
+              <SidebarMenuButton isActive={item.url === pathname} asChild>
+                <Link to={item.url}>
                   <item.icon />
                   <span>{item.title}</span>
-                </a>
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))}
